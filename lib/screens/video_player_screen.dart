@@ -77,7 +77,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Future<http.Response?> sendVideo(File videoFile) async {
     try {
       final url = Uri.parse(
-        'Http:localhost:5000/upload?choice=${widget.choice}',
+        'http:localhost:5000/upload?choice=${widget.choice}',
       );
       var request = http.MultipartRequest(
         'POST',
