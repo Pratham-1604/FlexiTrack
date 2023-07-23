@@ -47,7 +47,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     if (videoFile != null) {
       setState(() {
         _isLoading = true;
-        displayTextSend = 'Uploading pls wait';
       });
       final responseVideo = await sendVideo(videoFile!);
       debugPrint("video sent");
@@ -68,7 +67,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       setState(() {
         _isLoading = false;
         displayTextPick = 'Pick a video';
-        displayTextSend = 'Upload the video';
+        displayTextSend = 'Upload this video';
         videoFile = null;
         isError = true;
       });
@@ -78,7 +77,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Future<http.Response?> sendVideo(File videoFile) async {
     try {
       final url = Uri.parse(
-        'https://cb80-2405-201-31-30db-98d0-a0f7-27ec-1911.ngrok-free.app/upload?choice=${widget.choice}',
+        'Http:localhost:5000/upload?choice=${widget.choice}',
       );
       var request = http.MultipartRequest(
         'POST',
@@ -108,8 +107,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     }
   }
 
-  
-
   Future<void> initializePlayer(String videoPath) async {
     _videoPlayerController = VideoPlayerController.file(File(videoPath));
     await Future.wait([
@@ -119,7 +116,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       videoPlayerController: _videoPlayerController,
       autoPlay: true,
       looping: true,
-      allowFullScreen: true, 
+      allowFullScreen: true,
     );
   }
 
@@ -161,12 +158,18 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       children: [
                         ElevatedButton(
                           onPressed: pickVideo,
-                          child: Text(displayTextPick),
+                          child: Text(
+                            displayTextPick,
+                            style: const TextStyle(fontSize: 24),
+                          ),
                         ),
                         if (videoFile != null)
                           ElevatedButton(
                             onPressed: sendVideoFunction,
-                            child: Text(displayTextSend),
+                            child: Text(
+                              displayTextSend,
+                              style: const TextStyle(fontSize: 24),
+                            ),
                           ),
                       ],
                     ),

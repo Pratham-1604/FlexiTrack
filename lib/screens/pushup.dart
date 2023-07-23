@@ -1,6 +1,6 @@
-import 'package:fitnessfreakerzz/main.dart';
-import 'package:fitnessfreakerzz/screens/video_player_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'video_player_screen.dart';
 class Page2 extends StatelessWidget {
   const Page2({super.key});
 
